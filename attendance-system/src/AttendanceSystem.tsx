@@ -38,26 +38,15 @@ export default function AttendanceSystem() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  // Loading employees from localStorage or use default values
+  // Start with empty employees and attendance arrays
   const [employees, setEmployees] = useState<Employee[]>(() => {
     const savedEmployees = localStorage.getItem('employees');
-    return savedEmployees ? JSON.parse(savedEmployees) : [
-      { id: 1, name: 'John Doe', position: 'Developer', department: 'IT', joinDate: '2022-01-15' },
-      { id: 2, name: 'Jane Smith', position: 'Designer', department: 'UX', joinDate: '2021-11-03' },
-      { id: 3, name: 'Mike Johnson', position: 'Manager', department: 'Operations', joinDate: '2020-05-20' },
-      { id: 4, name: 'Sarah Williams', position: 'HR Specialist', department: 'HR', joinDate: '2023-02-10' },
-    ];
+    return savedEmployees ? JSON.parse(savedEmployees) : [];
   });
 
-  // Loading attendance from localStorage or use default values
   const [attendance, setAttendance] = useState<AttendanceRecord[]>(() => {
     const savedAttendance = localStorage.getItem('attendance');
-    return savedAttendance ? JSON.parse(savedAttendance) : [
-      { id: 1, employeeId: 1, date: '2023-11-01', punchIn: '08:45', punchOut: '17:00', status: 'present' },
-      { id: 2, employeeId: 2, date: '2023-11-01', punchIn: '09:15', punchOut: '17:30', status: 'late' },
-      { id: 3, employeeId: 3, date: '2023-11-01', punchIn: '08:30', punchOut: '12:30', status: 'half-day' },
-      { id: 4, employeeId: 4, date: '2023-11-01', punchIn: null, punchOut: null, status: 'absent' },
-    ];
+    return savedAttendance ? JSON.parse(savedAttendance) : [];
   });
 
   const [newEmployee, setNewEmployee] = useState({
